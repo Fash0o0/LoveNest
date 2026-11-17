@@ -1,0 +1,55 @@
+﻿点滴时间轴累计更新包（2026-10-24 00:54，北京时间）
+
+适用：已使用 likegirl-local-upload-20261022-192240.zip 的网站。
+已包含随后 20261022-211634 增量包的清单和共用动画文件，可以直接覆盖更新。
+
+更新步骤：
+1. 备份服务器当前网站文件及数据库。
+2. 解压 ZIP，将里面的文件按原目录结构上传到网站根目录（htdocs），覆盖同名文件。
+   ZIP 内没有额外父级文件夹；仅覆盖文件，不清空服务器目录。
+3. 打开“点滴”查看；到后台新增或编辑一条记录，检查多图上传和保存。
+   首次保存会自动添加 article.articleimages 字段，旧记录会保留。
+   若提示数据库升级权限不足，先检查字段是否已存在；只在不存在时执行
+   migrations/20261023-little-images.sql 一次。不要重复执行，也不要导入完整初始化 SQL。
+4. 浏览器强制刷新；有 CDN 缓存时刷新本次 CSS、JS、PHP 文件的缓存。
+
+本次功能：
+- 日期倒序的纵向恋爱时间轴；卡片最多九宫格，超出显示 +N，详情可翻阅全部照片。
+- 后台正文与照片独立上传、排序和保存，兼容旧记录；无点赞、评论、浏览数据。
+- 统一卡片滚动出现与悬停；蓝线逐步延伸且末端渐隐；详情开合、图片平滑横移。
+- 圆点固定在帖子位置，滚入顶栏后被遮住；年份接近顶部时显示在站点标题旁。
+- 手机端取消左侧年份栏，年份位于每年第一条帖子上方，卡片加宽。
+- 保留桌面、手机、键盘、减少动态效果、PJAX 和历史返回支持。
+
+依赖：沿用现有网站及数据库连接设置；PHP 需启用 DOM、mysqli/mysqlnd，
+图片上传需 GD 和 WebP 支持；images/ 目录需可写。
+本包不包含数据库连接配置、数据库导出、已有照片、天气密钥、缓存、测试或本地预览。
+应用和迁移文件共 25 个，另附本说明。迁移 SQL 是新增字段说明，不会自动执行。
+回退时恢复备份的网站代码即可，已新增的 articleimages 字段可保留。
+
+文件清单：
+Style/css/list.css
+Style/css/little-timeline.css
+Style/css/motion.css
+Style/js/little-timeline.js
+Style/js/motion.js
+admin/albumUpload.php
+admin/albumUploadCommon.php
+admin/assets/css/little-editor.css
+admin/assets/js/little-editor.js
+admin/littleAdd.php
+admin/littleAddPost.php
+admin/littleForm.php
+admin/littleSaveCommon.php
+admin/littleupda.php
+admin/modlitt.php
+head.php
+images/.htaccess
+list.php
+little-data.php
+little-feed.php
+little-service.php
+little-view.php
+little.php
+migrations/20261023-little-images.sql
+page.php

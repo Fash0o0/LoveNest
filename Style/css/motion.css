@@ -1,0 +1,116 @@
+/* Shared motion layer: short, purposeful movement for the glass surfaces. */
+:root {
+  --motion-ease: cubic-bezier(.22, 1, .36, 1);
+  --motion-surface: 260ms;
+  --motion-reveal: 680ms;
+  --motion-dialog-enter: 320ms;
+  --motion-dialog-exit: 220ms;
+  --motion-photo: 360ms;
+}
+
+/* Replace the earlier card entrances so a finished animation cannot lock hover transforms. */
+#pjax-container .card,
+#pjax-container .img_card,
+#pjax-container .list-card,
+#pjax-container .leavform {
+  animation: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  #pjax-container .list-card {
+    transition: box-shadow 260ms ease, border-color 260ms ease;
+  }
+
+  #pjax-container .card,
+  #pjax-container .card-b,
+  #pjax-container .weather-panel,
+  #pjax-container .home-weather__card,
+  #pjax-container .love-post,
+  #pjax-container .img_card {
+    transition: transform var(--motion-surface) var(--motion-ease), box-shadow var(--motion-surface) ease, border-color var(--motion-surface) ease;
+  }
+
+  #pjax-container .card:hover,
+  #pjax-container .card-b:hover,
+  #pjax-container .weather-panel:hover,
+  #pjax-container .home-weather__card:hover,
+  #pjax-container .love-post:hover,
+  #pjax-container .img_card:hover {
+    transform: translateY(-4px);
+  }
+
+  #pjax-container .weather-panel:hover,
+  #pjax-container .home-weather__card:hover,
+  #pjax-container .list-card:hover,
+  #pjax-container .love-post:hover {
+    box-shadow: 0 14px 32px rgba(43, 65, 96, .14), inset 0 1px 1px rgba(255, 255, 255, .95), inset 0 -1px 1px rgba(126, 158, 197, .2);
+    border-color: rgba(255, 255, 255, .95);
+  }
+}
+
+#pjax-container button:not(:disabled),
+#pjax-container summary,
+#pjax-container input[type="submit"],
+#pjax-container .tijiao {
+  transition: transform 160ms var(--motion-ease), color 180ms ease, background-color 180ms ease;
+}
+
+#pjax-container button:not(:disabled):active,
+#pjax-container summary:active,
+#pjax-container input[type="submit"]:active,
+#pjax-container .tijiao:active {
+  transform: scale(.98);
+}
+
+/* Temporary properties are released after entry, restoring glass and hover. */
+#pjax-container .motion-reveal:not(.is-revealed) {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: none;
+}
+
+#pjax-container .motion-reveal.is-revealed {
+  animation: scroll-reveal-enter var(--motion-reveal) var(--motion-ease) var(--reveal-delay, 0ms) both;
+  transition: none;
+}
+
+@keyframes scroll-reveal-enter {
+  from { opacity: 0; transform: translateY(36px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #pjax-container .motion-reveal:not(.is-revealed),
+  #pjax-container .motion-reveal.is-revealed {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  #pjax-container .card,
+  #pjax-container .card-b,
+  #pjax-container .weather-panel,
+  #pjax-container .home-weather__card,
+  #pjax-container .love-post,
+  #pjax-container .img_card,
+  #pjax-container input[type="submit"],
+  #pjax-container .tijiao,
+  #pjax-container .list-card,
+  #pjax-container button:not(:disabled),
+  #pjax-container summary {
+    transition: none;
+  }
+
+  #pjax-container button:not(:disabled):active,
+  #pjax-container summary:active,
+  #pjax-container input[type="submit"]:active,
+  #pjax-container .tijiao:active,
+  #pjax-container .card:hover,
+  #pjax-container .card-b:hover,
+  #pjax-container .weather-panel:hover,
+  #pjax-container .home-weather__card:hover,
+  #pjax-container .love-post:hover,
+  #pjax-container .img_card:hover {
+    transform: none;
+  }
+}

@@ -1,0 +1,11 @@
+DirectoryIndex index.php index.html
+<FilesMatch "^(ip\.txt|Config_DB\.php|weather-config\.local\.php|.*\.sql|weather-private\.pem|weather-usage\.json(\.lock)?)$">
+Require all denied
+</FilesMatch>
+
+# head.php versions the bundled cover by modification time after an upload.
+<IfModule mod_headers.c>
+    <Files "Cover.webp">
+        Header set Cache-Control "public, max-age=604800"
+    </Files>
+</IfModule>

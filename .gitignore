@@ -1,0 +1,41 @@
+# Deployment credentials and machine-local configuration
+Config_DB.php
+*-config.local.php
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.ini
+
+# Databases and operational data
+/sql/
+*.sql
+!/migrations/*.sql
+*.sqlite*
+*.db
+ip.txt
+weather-cache/*
+!weather-cache/.htaccess
+weather-usage.json*
+*.log
+
+# Private website content and upload destinations
+/images/*
+!/images/.htaccess
+/Style/img/Cover.webp
+/favicon.ico
+
+# Hosting placeholders, archives, and an old site copy in the CSS directory
+/index2.html
+/files for your website should be uploaded here!
+/Style/css/*
+!/Style/css/*.css
+*.zip
+*.7z
+*.tar
+*.gz
+*.bak
+*.original
